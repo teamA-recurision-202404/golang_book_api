@@ -1,9 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
+
+	"example.com/zipcode_api_202304/pkg/handlers"
 )
 
 func main() {
-	fmt.Println("Hello, World!")
+	log.Println("Starting the server!")
+
+	http.HandleFunc("/api/detail", handlers.DetailHandler)
+
+	http.ListenAndServe(":8000", nil)
 }
