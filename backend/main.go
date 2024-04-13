@@ -4,7 +4,7 @@ import (
     "encoding/json"
     "net/http"
     "fmt"
-	"golang_zipcode_api/backend/pkg/handlers"
+	"example.com/zipcode_api_202304/pkg/handlers"
 )
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
