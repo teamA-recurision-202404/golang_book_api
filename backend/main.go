@@ -1,9 +1,12 @@
 package main
 
 import (
-    "encoding/json"
-    "net/http"
+
+	"log"
+	"net/http"
+	"encoding/json"
     "fmt"
+
 	"example.com/zipcode_api_202304/pkg/handlers"
 )
 
@@ -25,6 +28,7 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+<<<<<<< HEAD
     fmt.Println("Starting the server!")
     
     // ルートとハンドラ関数を定義
@@ -32,4 +36,11 @@ func main() {
 
     // 8000番ポートでサーバを開始
     http.ListenAndServe(":8000", nil)
+=======
+	log.Println("Starting the server!")
+
+	http.HandleFunc("/api/detail", handlers.DetailHandler)
+
+	http.ListenAndServe(":8000", nil)
+>>>>>>> main
 }
