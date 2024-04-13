@@ -2,7 +2,6 @@ package main
 
 import (
 
-	"log"
 	"net/http"
 	"encoding/json"
     "fmt"
