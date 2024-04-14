@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type zipcode struct {
+type postcode struct {
 	Jis        string `json:"jis"`
 	OldZip     string `json:"old"`
 	Zip        string `json:"new"`
@@ -42,19 +42,19 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var zipcodes []zipcode
-	err = json.Unmarshal(body, &zipcodes)
+	var postcodes []postcode
+	err = json.Unmarshal(body, &postcodes)
 	if err != nil {
 		return
 	}
 
-	err = json.NewEncoder(w).Encode(zipcodes)
+	err = json.NewEncoder(w).Encode(postcodes)
 	if err != nil {
 		http.Error(w, "Failed to encode JSON", http.StatusInternalServerError)
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, "%s", zipcodes)
+	fmt.Fprintf(w, "%s", postcodes)
 
 }
