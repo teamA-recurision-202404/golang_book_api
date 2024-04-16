@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"example.com/zipcode_api_202304/pkg/handlers"
+	"github.com/teamA-recursion-202404/golang_postcode_api/pkg/handlers"
 )
 
 func main() {
