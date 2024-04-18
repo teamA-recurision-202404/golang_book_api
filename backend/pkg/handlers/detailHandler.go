@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strconv"
 )
 
 type PostcodeDetail struct {
@@ -26,12 +27,25 @@ type ErrorMessage struct {
 	Message     string `json:"message"`
 }
 
+func isNumericString(s string) bool {
+    _, err := strconv.Atoi(s)
+    return err == nil
+}
+
 func DetailHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	// パラメータを取得
 	query := r.URL.Query()
     postcode := query.Get("postcode")
+
+	// postcode が7桁の数字でない場合、エラーメッセージを返す
+	if len(postcode) != 7 || !isNumericString(postcode) {
+		json.NewEncoder(w).Encode(
+			ErrorMessage{Message: "7桁の数字を入力してください", StatusCode: 400},
+		)
+		return
+	}
 
 	// postcodeを使ってAPIを叩く
 	url := fmt.Sprintf("https://postcode.teraren.com/postcodes/%s.json", postcode)
