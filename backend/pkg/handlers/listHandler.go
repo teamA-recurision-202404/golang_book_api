@@ -60,7 +60,7 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func sortPostcodes(postcodes []postcode, sortOrder string) {
+func sortPostcodes(postcodes []Postcode, sortOrder string) {
 	if sortOrder == "asc" {
 		sort.Slice(postcodes, func(i, j int) bool {
 			return postcodes[i].Zip < postcodes[j].Zip
