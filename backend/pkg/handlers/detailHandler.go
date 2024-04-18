@@ -22,7 +22,7 @@ type PostcodeDetail struct {
 }
 
 type ErrorMessage struct {
-	StatusCode  int    `json:"status code"`
+	StatusCode  int    `json:"status_code"`
 	Message     string `json:"message"`
 }
 
