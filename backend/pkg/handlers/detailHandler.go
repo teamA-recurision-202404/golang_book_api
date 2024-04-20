@@ -22,6 +22,10 @@ type PostcodeDetail struct {
 }
 
 func DetailHandler(w http.ResponseWriter, r *http.Request) {
+	// "*" はワイルドカードで、どのドメインからのリクエストも許可する
+	// 本番環境ではセキュリティ上の理由から設定しないことが推奨される
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	// パラメータを取得
 	query := r.URL.Query()
     postcode := query.Get("postcode")

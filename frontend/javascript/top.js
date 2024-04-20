@@ -1,4 +1,3 @@
-const fetchBtn = document.querySelector('.search');
 const tbody = document.querySelector('#tbody');
 const detailBtn = document.querySelector('#api-detail');
 
@@ -21,7 +20,7 @@ detailBtn.addEventListener('click', () => {
     });
 });
 
-// === 以下、ダミーデータを100列表示する処理 ===
+// === ダミーデータを100列表示する処理 ===
 // ===   apiのレスポンスを受け取ったら、この処理を書き換える ===
 
 // ダミーデータ 項目: postcode, pref, city, town
@@ -71,9 +70,4 @@ for (let i = 0; i < 100; i++) {
   tbody.appendChild(tr);
 }
 
-// === ここまで ===
-
-// === 9999999 を 999-9999 に変換する関数 ===
-function convertPostcode(postcode) {
-  return postcode.slice(0, 3) + '-' + postcode.slice(3);
-}
+// === ここまで: ダミーデータを100列表示する処理 ===
