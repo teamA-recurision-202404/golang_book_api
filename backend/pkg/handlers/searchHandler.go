@@ -16,18 +16,19 @@ type postcode struct {
 	Suburb     string `json:"suburb"`
 }
 
-func ListHandler(w http.ResponseWriter, r *http.Request) {
+func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
-	page := query.Get("page")
+        // ここでユーザーが入力した文字列を取得
+	// input := 
 	fmt.Fprintf(w, "Hello World, from ListHandler!\n")
 
 	var response *http.Response
 	var err error
 
-	if page == "" {
+	if input == "" {
 		response, err = http.Get("https://postcode.teraren.com/postcodes.json")
 	} else {
-		response, err = http.Get("https://postcode.teraren.com/postcodes.json?page=" + page)
+		response, err = http.Get("https://postcode.teraren.com/postcodes.json?s=" + input)
 	}
 
 	if err != nil {
