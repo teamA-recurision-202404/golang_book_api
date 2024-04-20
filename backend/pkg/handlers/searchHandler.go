@@ -19,7 +19,8 @@ type postcode struct {
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
         // ここでユーザーが入力した文字列を取得
-	input := query.Get("input")
+	// input := query.Get("input")
+	input := "東京"
 	fmt.Fprintf(w, "Hello World, from ListHandler!\n")
 
 	var response *http.Response
