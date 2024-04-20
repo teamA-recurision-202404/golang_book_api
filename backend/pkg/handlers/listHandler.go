@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sort"
 )
 
 // レスポンスをjsonに変換するための構造体
@@ -23,8 +24,11 @@ type Postcode struct {
 }
 
 func ListHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
 	query := r.URL.Query()
 	page := query.Get("page")
+	sortOrder := query.Get("sort") // 変数名sortは不可っぽい ライブラリの名前とかぶるため
 
 	response, err := http.Get("https://postcode.teraren.com/postcodes.json?page=" + page)
 
@@ -46,12 +50,24 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = json.NewEncoder(w).Encode(ResponseList{Results: postcodes})
+	// asc or desc が指定されていたらソートする
+	sortPostcodes(postcodes, sortOrder)
 
+	err = json.NewEncoder(w).Encode(ResponseList{Results: postcodes})
 	if err != nil {
 		http.Error(w, "Failed to encode JSON", http.StatusInternalServerError)
 		return
 	}
+}
 
-	w.Header().Set("Content-Type", "application/json")
+func sortPostcodes(postcodes []Postcode, sortOrder string) {
+	if sortOrder == "asc" {
+		sort.Slice(postcodes, func(i, j int) bool {
+			return postcodes[i].Zip < postcodes[j].Zip
+		})
+	} else if sortOrder == "desc" {
+		sort.Slice(postcodes, func(i, j int) bool {
+			return postcodes[i].Zip > postcodes[j].Zip
+		})
+	}
 }
