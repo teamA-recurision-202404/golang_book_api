@@ -8,22 +8,66 @@
      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
      crossorigin="anonymous"
     >
-    <title>Document title</title>
+    <title>Postcode API Demo Top</title>
 
   </head>
-  <body class="mx-5">
+  <body>
     <h1 class="text-center my-5">郵便番号取得APIのデモ</h1>
-    <div class="d-flex mx-auto mb-4" style="width: 500px;">
-      <p>詳細表示</p>
+
+    <div class="mx-5">
+      <div class="row">
+        <div class="col">
+          <h2 id="postcode">郵便番号: 〒</h2>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>都道府県</th>
+                <td id="prefecture"></td>
+              </tr>
+              <tr>
+                <th class="fw-normal">都道府県（かな）</th>
+                <td id="prefecture_kana"></td>
+              </tr>
+              <tr>
+                <th class="fw-normal">都道府県（ローマ字）</th>
+                <td id="prefecture_roman"></td>
+              </tr>
+              <tr>
+                <th>市区町村</th>
+                <td id="city"></td>
+              </tr>
+              <tr>
+                <th class="fw-normal">市区町村（かな）</th>
+                <td id="city_kana"></td>
+              </tr>
+              <tr>
+                <th class="fw-normal">市区町村（ローマ字）</th>
+                <td id="city_roman"></td>
+              </tr>
+              <tr>
+                <th>地区名</th>
+                <td id="suburb"></td>
+              </tr>
+              <tr>
+                <th class="fw-normal">地区名（かな）</th>
+                <td id="suburb_kana"></td>
+              </tr>
+              <tr>
+                <th class="fw-normal">地区名（ローマ字）</th>
+                <td id="suburb_roman"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
-
-    <table class="table table-light table-hover">
-
-    </table>
+    <div class="d-flex justify-content-end mx-5 mb-5">
+      <a href="./top.html" class="btn btn-secondary">トップに戻る</a>
+    </div>
 
     <footer class="footer mt-auto py-3 bg-light">
-      <div class="container d-flex justify-content-end">
+      <div class="d-flex justify-content-end mx-5">
         <span class="text-muted">Provided by Postcode API Demo Team</span>
       </div>
     </footer>

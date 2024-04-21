@@ -1,23 +1,34 @@
 const tbody = document.querySelector('#tbody');
 const detailBtn = document.querySelector('#api-detail');
 
-// 試しに作成: ボタンをクリックしたときにapiにアクセスする処理
-fetchBtn.addEventListener('click', () => {
-  fetch('https://postcode.teraren.com/postcodes/0600001.json')
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
-});
+// 表示されている郵便番号ごとに詳細ページに遷移するボタンを実装する
 
-// 詳細のapiを叩く + 詳細ページに移動する
-detailBtn.addEventListener('click', () => {
-  fetch('https://postcode.teraren.com/postcodes/0600001.json')
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      window.location.href = './detail.html';
+// クリック時に api取得関数を呼び出す+それが画面遷移も行う
+async function fetchDetail() {
+  const serverUrl = 'http://localhost:8000/api';
+  try {
+    const response = await fetch(`${serverUrl}/detail?postcode=1500012`, {
+      mode: 'cors',
     });
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.statusText}`);
+    }
+    const data = await response.json();
+    // console.log(data);
+    // データを詳細ページに渡す
+    //   SessionStorageとは、ウェブブラウザに搭載されている機能の一つ
+    //   参考: https://developer.mozilla.org/ja/docs/Web/API/Window/sessionStorage
+    sessionStorage.setItem('detail', JSON.stringify(data));
+
+    // 画面遷移
+    window.location.href = './detail.html';
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+detailBtn.addEventListener('click', () => {
+  fetchDetail();
 });
 
 // === ダミーデータを100列表示する処理 ===
@@ -57,7 +68,7 @@ for (let i = 0; i < 100; i++) {
   td3.textContent = dummyData[0].city;
   td4.textContent = dummyData[0].town;
   button.textContent = '詳細';
-  button.classList.add('detail');
+  button.classList.add('detail', 'btn', 'btn-dark');
 
   tr.appendChild(th);
   tr.appendChild(td1);
