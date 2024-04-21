@@ -11,7 +11,6 @@ async function postCodeList(pageNumber) {
           throw new Error(`Error fetching data: ${response.statusText}`);
       }
       const data = await response.json();
-      console.log(data["results"]);
       make_list(data["results"])
   } catch (error) {
       console.error("Error:", error);
@@ -45,7 +44,6 @@ topForm.addEventListener('submit', function(event) {
 
     pageNumber = document.getElementById('top-page').value;
     postCodeList(pageNumber);
-    console.log("Bottom Page Number:", pageNumber);
 });
 
 const bottomForm = document.getElementById('bottom-page-form');
@@ -54,7 +52,6 @@ bottomForm.addEventListener('submit', function(event) {
 
     pageNumber = document.getElementById('bottom-page').value;
     postCodeList(pageNumber);
-    console.log("Bottom Page Number:", pageNumber);
 });
 
 
