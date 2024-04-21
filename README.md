@@ -85,7 +85,8 @@ curl 'http://localhost:8000/api/search?keyword=富士山'
 ```json
 {
   "results":[
-    {"new":"3580017","prefecture":"埼玉県","prefecture_kana":"サイタマケン","prefecture_roman":"Saitamaken","city":"入間市","city_kana":"イルマシ","city_roman":"Irumashi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""},{"new":"1901202","prefecture":"東京都","prefecture_kana":"トウキョウト","prefecture_roman":"Toukyouto","city":"西多摩郡瑞穂町","city_kana":"ニシタマグンミズホマチ","city_roman":"Nishitamagummizuhomachi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""},
+    {"new":"3580017","prefecture":"埼玉県","prefecture_kana":"サイタマケン","prefecture_roman":"Saitamaken","city":"入間市","city_kana":"イルマシ","city_roman":"Irumashi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""},
+    {"new":"1901202","prefecture":"東京都","prefecture_kana":"トウキョウト","prefecture_roman":"Toukyouto","city":"西多摩郡瑞穂町","city_kana":"ニシタマグンミズホマチ","city_roman":"Nishitamagummizuhomachi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""},
     ...
   ]
 }
@@ -109,7 +110,17 @@ curl 'http://localhost:8000/api/detail?postcode=1901202'
 
 ```json
 {
-  "new":"1901202","prefecture":"東京都","prefecture_kana":"トウキョウト","prefecture_roman":"Toukyouto","city":"西多摩郡瑞穂町","city_kana":"ニシタマグンミズホマチ","city_roman":"Nishitamagummizuhomachi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""
+  "new":"1901202",
+   "prefecture":"東京都",
+   "prefecture_kana":"トウキョウト",
+   "prefecture_roman":"Toukyouto",
+   "city":"西多摩郡瑞穂町",
+   "city_kana":"ニシタマグンミズホマチ",
+   "city_roman":"Nishitamagummizuhomachi",
+   "suburb":"駒形富士山",
+   "suburb_kana":"コマガタフジヤマ",
+   "suburb_roman":"Komagatafujiyama",
+   "street_address":""
 }
 ```
 
