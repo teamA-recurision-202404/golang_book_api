@@ -1,4 +1,3 @@
-const fetchBtn = document.querySelector('.search');
 const tbody = document.querySelector('#tbody');
 const detailBtn = document.querySelector('#api-detail');
 
@@ -82,3 +81,15 @@ function make_list(list) {
     tbody.appendChild(tr);
   }
 }
+
+// === 検索ボタンを押した時の処理（search.jsと重複しているので共通化できるかも） ===
+
+const searchButton = document.querySelector('#search');
+const searchInput = document.querySelector('#search-input');
+
+searchButton.addEventListener('click', () => {
+  fetchSearch();
+});
+
+// === 検索ワードをフォームに表示する処理 ===
+searchInput.value = searchKeyword;
