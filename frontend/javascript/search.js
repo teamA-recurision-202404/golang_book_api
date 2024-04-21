@@ -1,6 +1,16 @@
 const searchResult = JSON.parse(sessionStorage.getItem('searchResult'));
 const searchKeyword = sessionStorage.getItem('searchKeyword');
 
+// === 検索結果が0件の場合の処理 ===
+function validateEmptyResult() {
+  if (searchResult.status_code === 404) {
+    const tr = document.createElement('tr');
+    tr.textContent = '検索結果がありません';
+    tbody.appendChild(tr);
+    return;
+  }
+}
+
 // === テーブルに最大100列の検索結果を表示する ===
 
 // 作成されるtr要素の中身
@@ -14,6 +24,8 @@ const searchKeyword = sessionStorage.getItem('searchKeyword');
 // </tr>
 
 const tbody = document.querySelector('#tbody');
+
+validateEmptyResult();
 
 for (let i = 0; i < searchResult.length; i++) {
   const tr = document.createElement('tr');

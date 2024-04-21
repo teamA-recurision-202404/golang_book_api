@@ -18,7 +18,6 @@ async function fetchSearch() {
       throw new Error(`Error fetching data: ${response.statusText}`);
     }
     const data = await response.json();
-    // console.log(data);
     sessionStorage.setItem('searchResult', JSON.stringify(data));
     sessionStorage.setItem('searchKeyword', searchInput.value);
 

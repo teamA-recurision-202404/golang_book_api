@@ -31,7 +31,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	// keywordが空文字の場合、エラーメッセージを返す
 	if keyword == "" {
 		json.NewEncoder(w).Encode(
-			structs.ErrorMessage{Message: "keywordを入力してください", StatusCode: 400},
+			structs.ErrorMessage{Message: "keywordを入力してください", StatusCode: 404},
 		)
 		return
 	}
