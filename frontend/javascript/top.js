@@ -101,15 +101,3 @@ function make_list(list) {
   }
 }
 
-// === 以下、ダミーデータを100列表示する処理 ===
-// ===   apiのレスポンスを受け取ったら、この処理を書き換える ===
-
-// ダミーデータ 項目: postcode, pref, city, town
-dummyData = [
-  { postcode: '9999999', pref: 'dummy', city: 'New York', town: 'Brooklyn' },
-];
-
-// === 9999999 を 999-9999 に変換する関数 ===
-function convertPostcode(postcode) {
-  return postcode.slice(0, 3) + '-' + postcode.slice(3);
-}
