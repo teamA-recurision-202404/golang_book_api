@@ -2,11 +2,11 @@ const fetchBtn = document.querySelector('.search');
 const tbody = document.querySelector('#tbody');
 const detailBtn = document.querySelector('#api-detail');
 
-async function postCodeList() {
+async function postCodeList(pageNumber) {
   const serverUrl = "http://localhost:8000/api";
   try {
       console.log(`${serverUrl}/list`)
-      const response = await fetch(`${serverUrl}/list`,{ mode: "cors" });
+      const response = await fetch(`${serverUrl}/list?page=${pageNumber}`,{ mode: "cors" });
       if (!response.ok) {
           throw new Error(`Error fetching data: ${response.statusText}`);
       }
@@ -18,7 +18,7 @@ async function postCodeList() {
   }
 }
 
-console.log(postCodeList())
+postCodeList(1)
 
 // 試しに作成: ボタンをクリックしたときにapiにアクセスする処理
 fetchBtn.addEventListener('click', () => {
@@ -30,16 +30,47 @@ fetchBtn.addEventListener('click', () => {
 });
 
 // 詳細のapiを叩く + 詳細ページに移動する
-detailBtn.addEventListener('click', () => {
-  fetch('https://postcode.teraren.com/postcodes/0600001.json')
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      window.location.href = './detail.html';
-    });
+// detailBtn.addEventListener('click', () => {
+//   fetch('https://postcode.teraren.com/postcodes/0600001.json')
+//     .then((res) => res.json())
+//     .then((data) => {
+//       console.log(data);
+//       window.location.href = './detail.html';
+//     });
+// });
+
+const topForm = document.getElementById('top-page-form');
+topForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // フォームのデフォルトの動作をキャンセル
+
+    pageNumber = document.getElementById('top-page').value;
+    postCodeList(pageNumber);
+    console.log("Bottom Page Number:", pageNumber);
 });
 
+const bottomForm = document.getElementById('bottom-page-form');
+bottomForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // フォームのデフォルトの動作をキャンセル
+
+    pageNumber = document.getElementById('bottom-page').value;
+    postCodeList(pageNumber);
+    console.log("Bottom Page Number:", pageNumber);
+});
+
+
+// 作成されるtr要素の中身
+
+// <tr>
+//  <th scope="row">1</th>
+//  <td>111-2222</td>
+//  <td>dummy</td>
+//  <td>New York</td>
+//  <td>Brooklyn</td>
+//  <td><button id="detail" class="search text-primary">詳細</button></td>
+// </tr>
+
 function make_list(list) {
+  tbody.innerHTML = "";
   for (let i = 0; i < list.length; ++i) {
     const tr = document.createElement('tr');
     const th = document.createElement('th');
@@ -66,7 +97,6 @@ function make_list(list) {
     tr.appendChild(td4);
     tr.appendChild(td5);
     td5.appendChild(button);
-
     tbody.appendChild(tr);
   }
 }

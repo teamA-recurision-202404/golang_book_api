@@ -20,11 +20,10 @@
       <input type="text" id="zipcode" />
       <button id="search" class="search text-primary">検索</button>
     </div>
-
-    <div class="d-flex justify-content-center">
-      <input type="text" id="list-page" />
-      <button id="search" class="search text-dark m-1">入力したページへ移動</button>
-    </div>
+    <form id="top-page-form">
+      <input type="number" id="top-page" min="1">
+      <button type="submit">入力したページへ移動</button>
+    </form>
     <table class="table table-light table-hover my-5">
       <thead>
         <tr>
@@ -49,10 +48,10 @@
       </tbody>
     </table>
 
-    <div class="d-flex my-5 p-3 justify-content-center">
-      <input type="text"id="list-page" />
-      <button id="search" class="search text-dark m-1">入力したページへ移動</button>
-    </div>
+    <form id="bottom-page-form">
+      <input type="number" id="bottom-page" min="1">
+      <button type="submit">入力したページへ移動</button>
+    </form>
 
     <footer class="footer mt-auto py-3 bg-light">
       <div class="container d-flex justify-content-end">
