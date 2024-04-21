@@ -21,24 +21,7 @@ async function postCodeList(pageNumber) {
 
 postCodeList(1);
 
-// 試しに作成: ボタンをクリックしたときにapiにアクセスする処理
-fetchBtn.addEventListener('click', () => {
-  fetch('https://postcode.teraren.com/postcodes/0600001.json')
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
-});
-
-// 詳細のapiを叩く + 詳細ページに移動する
-// detailBtn.addEventListener('click', () => {
-//   fetch('https://postcode.teraren.com/postcodes/0600001.json')
-//     .then((res) => res.json())
-//     .then((data) => {
-//       console.log(data);
-//       window.location.href = './detail.html';
-//     });
-// });
+// === ページ移動する処理 ===
 
 const topForm = document.getElementById('top-page-form');
 topForm.addEventListener('submit', function (event) {
@@ -56,18 +39,19 @@ bottomForm.addEventListener('submit', function (event) {
   postCodeList(pageNumber);
 });
 
-// 作成されるtr要素の中身
-
-// <tr>
-//  <th scope="row">1</th>
-//  <td>111-2222</td>
-//  <td>dummy</td>
-//  <td>New York</td>
-//  <td>Brooklyn</td>
-//  <td><button id="detail" class="search text-primary">詳細</button></td>
-// </tr>
+// === jsonデータを表示する処理 ===
 
 function make_list(list) {
+  // 作成されるtr要素の中身
+  // <tr>
+  //  <th scope="row">1</th>
+  //  <td>111-2222</td>
+  //  <td>dummy</td>
+  //  <td>New York</td>
+  //  <td>Brooklyn</td>
+  //  <td><button id="detail" class="search btn btn-success">詳細</button></td>
+  // </tr>
+
   tbody.innerHTML = '';
   for (let i = 0; i < list.length; ++i) {
     const tr = document.createElement('tr');
@@ -86,7 +70,7 @@ function make_list(list) {
     td3.textContent = list[i].city;
     td4.textContent = list[i].suburb;
     button.textContent = '詳細';
-    button.classList.add('detail', 'btn', 'btn-dark');
+    button.classList.add('detail', 'btn', 'btn-success');
 
     tr.appendChild(th);
     tr.appendChild(td1);
