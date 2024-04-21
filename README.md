@@ -24,7 +24,9 @@
 2. 絶対パスをブラウザで入力し、top.htｍlを開く
    `file:///home/hoge/golang_zipcode_api/frontend/html/top.html`
 
-# エンドポイント
+## APIについて
+
+### エンドポイント
 
 1. 郵便番号一覧表示 API のエンドポイント
    `api/list`　
@@ -36,18 +38,78 @@
    `api/detail`
    郵便番号を指定すると、その詳細情報を取得するエンドポイント。
 
+### リクエストとレスポンス
 
-# こだわったところ
+#### リスト取得
 
-### ページネーション
-API経由で取得できるデータが100件/回までであることから、全件表示は技術的にハードルが高くなるため、あえて100件でページを区切り、ページを切り替えるたびにAPIを呼び出すという仕様に仕様調整を行った。
+##### リクエスト
 
+```
+curl 'http://localhost:8000/api/list?page={ページ番号}'
+```
 
-# 改善点
+##### 使用例
 
-### ページネーションの改善
-ページネーションにおいて、20ページを指定されてもそこにデータがない場合「表示するデータがありません」のように通知するページがない
+```
+curl 'http://localhost:8000/api/list?page=1'
+```
 
-### 本番環境へのデプロイ
-APIエンドポイントを開発することに注力したため、本番環境へのデプロイは完了していないため、ユーザーフレンドリーではない仕組みとなっている
+##### レスポンス
+
+```json
+{
+  "results":[
+    {"new":"0600000","prefecture":"北海道","prefecture_kana":"ホッカイドウ","prefecture_roman":"Hokkaidou","city":"札幌市中央区","city_kana":"サッポロシチュウオウク","city_roman":"Sapporoshichuuouku","suburb":"","suburb_kana":"","suburb_roman":"","street_address":""},
+    {"new":"0640941","prefecture":"北海道","prefecture_kana":"ホッカイドウ","prefecture_roman":"Hokkaidou","city":"札幌市中央区","city_kana":"サッポロシチュウオウク","city_roman":"Sapporoshichuuouku","suburb":"旭ケ丘","suburb_kana":"アサヒガオカ","suburb_roman":"Asahigaoka","street_address":""},
+    ...
+  ]
+}
+```
+
+#### 検索
+
+##### リクエスト
+
+```
+curl 'http://localhost:8000/api/search?keyword={検索ワード}'
+```
+
+##### 使用例
+
+```
+curl 'http://localhost:8000/api/search?keyword=富士山'
+```
+
+##### レスポンス
+
+```json
+{
+  "results":[
+    {"new":"3580017","prefecture":"埼玉県","prefecture_kana":"サイタマケン","prefecture_roman":"Saitamaken","city":"入間市","city_kana":"イルマシ","city_roman":"Irumashi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""},{"new":"1901202","prefecture":"東京都","prefecture_kana":"トウキョウト","prefecture_roman":"Toukyouto","city":"西多摩郡瑞穂町","city_kana":"ニシタマグンミズホマチ","city_roman":"Nishitamagummizuhomachi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""},
+    ...
+  ]
+}
+```
+
+#### 詳細
+
+##### リクエスト
+
+```
+curl 'http://localhost:8000/api/detail?postcode={郵便番号}'
+```
+
+##### 使用例
+
+```
+curl 'http://localhost:8000/api/detail?postcode=1901202'
+```
+
+##### レスポンス
+
+```json
+{
+  "new":"1901202","prefecture":"東京都","prefecture_kana":"トウキョウト","prefecture_roman":"Toukyouto","city":"西多摩郡瑞穂町","city_kana":"ニシタマグンミズホマチ","city_roman":"Nishitamagummizuhomachi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""
+}
+```
 
