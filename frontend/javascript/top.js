@@ -3,21 +3,23 @@ const tbody = document.querySelector('#tbody');
 const detailBtn = document.querySelector('#api-detail');
 
 async function postCodeList(pageNumber) {
-  const serverUrl = "http://localhost:8000/api";
+  const serverUrl = 'http://localhost:8000/api';
   try {
-      console.log(`${serverUrl}/list`)
-      const response = await fetch(`${serverUrl}/list?page=${pageNumber}`,{ mode: "cors" });
-      if (!response.ok) {
-          throw new Error(`Error fetching data: ${response.statusText}`);
-      }
-      const data = await response.json();
-      make_list(data["results"])
+    console.log(`${serverUrl}/list`);
+    const response = await fetch(`${serverUrl}/list?page=${pageNumber}`, {
+      mode: 'cors',
+    });
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.statusText}`);
+    }
+    const data = await response.json();
+    make_list(data['results']);
   } catch (error) {
-      console.error("Error:", error);
+    console.error('Error:', error);
   }
 }
 
-postCodeList(1)
+postCodeList(1);
 
 // 試しに作成: ボタンをクリックしたときにapiにアクセスする処理
 fetchBtn.addEventListener('click', () => {
@@ -39,21 +41,20 @@ fetchBtn.addEventListener('click', () => {
 // });
 
 const topForm = document.getElementById('top-page-form');
-topForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // フォームのデフォルトの動作をキャンセル
+topForm.addEventListener('submit', function (event) {
+  event.preventDefault(); // フォームのデフォルトの動作をキャンセル
 
-    pageNumber = document.getElementById('top-page').value;
-    postCodeList(pageNumber);
+  pageNumber = document.getElementById('top-page').value;
+  postCodeList(pageNumber);
 });
 
 const bottomForm = document.getElementById('bottom-page-form');
-bottomForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // フォームのデフォルトの動作をキャンセル
+bottomForm.addEventListener('submit', function (event) {
+  event.preventDefault(); // フォームのデフォルトの動作をキャンセル
 
-    pageNumber = document.getElementById('bottom-page').value;
-    postCodeList(pageNumber);
+  pageNumber = document.getElementById('bottom-page').value;
+  postCodeList(pageNumber);
 });
-
 
 // 作成されるtr要素の中身
 
@@ -67,7 +68,7 @@ bottomForm.addEventListener('submit', function(event) {
 // </tr>
 
 function make_list(list) {
-  tbody.innerHTML = "";
+  tbody.innerHTML = '';
   for (let i = 0; i < list.length; ++i) {
     const tr = document.createElement('tr');
     const th = document.createElement('th');
@@ -85,7 +86,7 @@ function make_list(list) {
     td3.textContent = list[i].city;
     td4.textContent = list[i].suburb;
     button.textContent = '詳細';
-    button.classList.add('detail');
+    button.classList.add('detail', 'btn', 'btn-dark');
 
     tr.appendChild(th);
     tr.appendChild(td1);
@@ -97,4 +98,3 @@ function make_list(list) {
     tbody.appendChild(tr);
   }
 }
-
