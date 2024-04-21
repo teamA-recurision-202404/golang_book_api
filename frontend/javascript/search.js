@@ -1,5 +1,4 @@
 const tbody = document.querySelector('#tbody');
-const detailBtn = document.querySelector('#api-detail');
 
 const searchResult = JSON.parse(sessionStorage.getItem('searchResult'));
 const searchKeyword = sessionStorage.getItem('searchKeyword');
@@ -8,12 +7,9 @@ const searchKeyword = sessionStorage.getItem('searchKeyword');
 const searchInput = document.querySelector('#search-input');
 searchInput.value = searchKeyword;
 
-//
+// === テーブルに最大100列の検索結果を表示する ===
 
-console.log(searchResult);
-console.log(searchKeyword);
 // 作成されるtr要素の中身
-
 // <tr>
 //  <th scope="row">1</th>
 //  <td>111-2222</td>
@@ -23,7 +19,6 @@ console.log(searchKeyword);
 //  <td><button id="detail" class="search text-primary">詳細</button></td>
 // </tr>
 
-// テーブルに最大100列の検索結果を表示する
 for (let i = 0; i < searchResult.length; i++) {
   const tr = document.createElement('tr');
   const th = document.createElement('th');
@@ -41,7 +36,8 @@ for (let i = 0; i < searchResult.length; i++) {
   td3.textContent = searchResult[i].city;
   td4.textContent = searchResult[i].suburb;
   button.textContent = '詳細';
-  button.classList.add('detail', 'btn', 'btn-dark');
+  button.classList.add('detail', 'btn', 'btn-success');
+  button.value = searchResult[i].new;
 
   tr.appendChild(th);
   tr.appendChild(td1);
@@ -55,3 +51,13 @@ for (let i = 0; i < searchResult.length; i++) {
 }
 
 // === ここまで: 検索結果を最大100列表示する処理 ===
+
+// === すべての詳細ボタンに クリック時のfetchDetail実行を追加 ===
+
+const detailButtons = document.querySelectorAll('.detail');
+
+detailButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    fetchDetail(button.value);
+  });
+});

@@ -4,7 +4,6 @@ function convertPostcode(postcode) {
 }
 
 // === 検索ボタンを押した時の処理 ===
-// === topとsearchResultの2画面で使用 ===
 
 async function fetchSearch() {
   const serverUrl = 'http://localhost:8000/api';
@@ -25,6 +24,28 @@ async function fetchSearch() {
 
     // 画面遷移
     window.location.href = './searchResult.html';
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+// === 詳細データ取得 + 詳細ページ遷移 ===
+
+async function fetchDetail(value) {
+  const serverUrl = 'http://localhost:8000/api';
+
+  try {
+    const response = await fetch(`${serverUrl}/detail?postcode=${value}`, {
+      mode: 'cors',
+    });
+    if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.statusText}`);
+    }
+    const data = await response.json();
+    sessionStorage.setItem('detail', JSON.stringify(data));
+
+    // 画面遷移
+    window.location.href = './detail.html';
   } catch (error) {
     console.error('Error:', error);
   }
