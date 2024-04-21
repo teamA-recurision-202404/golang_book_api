@@ -31,6 +31,15 @@ detailBtn.addEventListener('click', () => {
   fetchDetail();
 });
 
+// === 検索ボタンを押した時の処理 ===
+
+const searchBtn = document.querySelector('#search');
+const searchInput = document.querySelector('#search-input');
+
+searchBtn.addEventListener('click', () => {
+  fetchSearch();
+});
+
 // === ダミーデータを100列表示する処理 ===
 // ===   apiのレスポンスを受け取ったら、この処理を書き換える ===
 
