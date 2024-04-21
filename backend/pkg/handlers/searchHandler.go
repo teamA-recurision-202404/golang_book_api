@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+
+	"github.com/teamA-recursion-202404/golang_postcode_api/pkg/structs"
 )
 
 type postcode struct {
@@ -16,6 +18,7 @@ type postcode struct {
 	Suburb     string `json:"suburb"`
 }
 
+
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	// "*" はワイルドカードで、どのドメインからのリクエストも許可する
 	// 本番環境ではセキュリティ上の理由から設定しないことが推奨される
@@ -25,7 +28,13 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	keyword := query.Get("keyword")
 
-	// TODO: keywordが空文字の場合、エラーメッセージを返す
+	// keywordが空文字の場合、エラーメッセージを返す
+	if keyword == "" {
+		json.NewEncoder(w).Encode(
+			structs.ErrorMessage{Message: "keywordを入力してください", StatusCode: 400},
+		)
+		return
+	}
 
 	// keywordが複数の場合、それを検索できるように整える
 	//   ポストくんが受け付ける複数検索の形式は以下の通り
