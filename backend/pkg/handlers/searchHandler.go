@@ -3,7 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 )
 
@@ -17,20 +17,21 @@ type postcode struct {
 }
 
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
+	// "*" はワイルドカードで、どのドメインからのリクエストも許可する
+	// 本番環境ではセキュリティ上の理由から設定しないことが推奨される
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+
 	query := r.URL.Query()
-        // ここでユーザーが入力した文字列を取得
-	// input := query.Get("input")
-	input := "東京"
-	fmt.Fprintf(w, "Hello World, from ListHandler!\n")
+	keyword := query.Get("keyword")
 
-	var response *http.Response
-	var err error
+	// TODO: keywordが空文字の場合、エラーメッセージを返す
 
-	if input == "" {
-		response, err = http.Get("https://postcode.teraren.com/postcodes.json")
-	} else {
-		response, err = http.Get("https://postcode.teraren.com/postcodes.json?s=" + input)
-	}
+	// keywordが複数の場合、それを検索できるように整える
+	//   ポストくんが受け付ける複数検索の形式は以下の通り
+	//   ?keyword=東京+渋谷+恵比寿ガーデンプレイス
+
+	response, err := http.Get("https://postcode.teraren.com/postcodes.json?s=" + keyword)
 
 	if err != nil {
 		fmt.Println("Error fetching data:", err)
@@ -39,7 +40,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 
 	defer response.Body.Close()
 
-	body, err := ioutil.ReadAll(response.Body)
+	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		return
 	}
@@ -50,13 +51,5 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = json.NewEncoder(w).Encode(postcodes)
-	if err != nil {
-		http.Error(w, "Failed to encode JSON", http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, "%s", postcodes)
-
+	json.NewEncoder(w).Encode(postcodes)
 }
