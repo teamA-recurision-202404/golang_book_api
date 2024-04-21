@@ -10,20 +10,6 @@ import (
 	"github.com/teamA-recursion-202404/golang_postcode_api/pkg/structs"
 )
 
-type PostcodeDetail struct {
-    Postcode        string `json:"new"`
-    Prefecture      string `json:"prefecture"`
-    PrefectureKana  string `json:"prefecture_kana"`
-    PrefectureRoman string `json:"prefecture_roman"`
-    City            string `json:"city"`
-    CityKana        string `json:"city_kana"`
-    CityRoman       string `json:"city_roman"`
-    Suburb          string `json:"suburb"`
-    SuburbKana      string `json:"suburb_kana"`
-    SuburbRoman     string `json:"suburb_roman"`
-    StreetAddress   string `json:"street_address"` // 1008066 のとき"１丁目３−７"が入る
-}
-
 func isNumericString(s string) bool {
     _, err := strconv.Atoi(s)
     return err == nil
@@ -72,7 +58,7 @@ func DetailHandler(w http.ResponseWriter, r *http.Request) {
 	body, _ := io.ReadAll(res.Body)
 
 	// レスポンスを構造体に変換
-	var postcodeDetail PostcodeDetail
+	var postcodeDetail structs.Postcode
 
 	if err := json.Unmarshal(body, &postcodeDetail); err != nil {
 		fmt.Println(err)

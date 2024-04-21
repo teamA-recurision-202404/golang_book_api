@@ -9,16 +9,6 @@ import (
 	"github.com/teamA-recursion-202404/golang_postcode_api/pkg/structs"
 )
 
-type postcode struct {
-	Jis        string `json:"jis"`
-	OldZip     string `json:"old"`
-	Zip        string `json:"new"`
-	Prefecture string `json:"prefecture"`
-	City       string `json:"city"`
-	Suburb     string `json:"suburb"`
-}
-
-
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
 	// "*" はワイルドカードで、どのドメインからのリクエストも許可する
 	// 本番環境ではセキュリティ上の理由から設定しないことが推奨される
@@ -36,10 +26,7 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// keywordが複数の場合、それを検索できるように整える
-	//   ポストくんが受け付ける複数検索の形式は以下の通り
-	//   ?keyword=東京+渋谷+恵比寿ガーデンプレイス
-
+	// 備考: keywordが複数の場合でも自動的に複数語句で検索される
 	response, err := http.Get("https://postcode.teraren.com/postcodes.json?s=" + keyword)
 
 	if err != nil {
@@ -54,11 +41,11 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var postcodes []postcode
+	var postcodes []structs.Postcode
 	err = json.Unmarshal(body, &postcodes)
 	if err != nil {
 		return
 	}
 
-	json.NewEncoder(w).Encode(postcodes)
+	json.NewEncoder(w).Encode(structs.ResponseList{Results: postcodes})
 }

@@ -6,22 +6,9 @@ import (
 	"io"
 	"net/http"
 	"sort"
+
+	"github.com/teamA-recursion-202404/golang_postcode_api/pkg/structs"
 )
-
-// レスポンスをjsonに変換するための構造体
-// 参考: https://randomuser.me/documentation#results
-type ResponseList struct {
-	Results []Postcode `json:"results"`
-}
-
-type Postcode struct {
-	Jis        string `json:"jis"`
-	OldZip     string `json:"old"`
-	Zip        string `json:"new"`
-	Prefecture string `json:"prefecture"`
-	City       string `json:"city"`
-	Suburb     string `json:"suburb"`
-}
 
 func ListHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -45,7 +32,7 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var postcodes []Postcode
+	var postcodes []structs.Postcode
 	err = json.Unmarshal(body, &postcodes)
 	if err != nil {
 		return
@@ -54,21 +41,21 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 	// asc or desc が指定されていたらソートする
 	sortPostcodes(postcodes, sortOrder)
 
-	err = json.NewEncoder(w).Encode(ResponseList{Results: postcodes})
+	err = json.NewEncoder(w).Encode(structs.ResponseList{Results: postcodes})
 	if err != nil {
 		http.Error(w, "Failed to encode JSON", http.StatusInternalServerError)
 		return
 	}
 }
 
-func sortPostcodes(postcodes []Postcode, sortOrder string) {
+func sortPostcodes(postcodes []structs.Postcode, sortOrder string) {
 	if sortOrder == "asc" {
 		sort.Slice(postcodes, func(i, j int) bool {
-			return postcodes[i].Zip < postcodes[j].Zip
+			return postcodes[i].Postcode < postcodes[j].Postcode
 		})
 	} else if sortOrder == "desc" {
 		sort.Slice(postcodes, func(i, j int) bool {
-			return postcodes[i].Zip > postcodes[j].Zip
+			return postcodes[i].Postcode > postcodes[j].Postcode
 		})
 	}
 }
