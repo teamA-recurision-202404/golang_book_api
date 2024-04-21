@@ -79,22 +79,6 @@ dummyData = [
   { postcode: '9999999', pref: 'dummy', city: 'New York', town: 'Brooklyn' },
 ];
 
-// 作成されるtr要素の中身
-
-// <tr>
-//  <th scope="row">1</th>
-//  <td>111-2222</td>
-//  <td>dummy</td>
-//  <td>New York</td>
-//  <td>Brooklyn</td>
-//  <td><button id="detail" class="search text-primary">詳細</button></td>
-// </tr>
-
-// テーブルに100列までダミーデータを表示する
-
-
-// === ここまで ===
-
 // === 9999999 を 999-9999 に変換する関数 ===
 function convertPostcode(postcode) {
   return postcode.slice(0, 3) + '-' + postcode.slice(3);
