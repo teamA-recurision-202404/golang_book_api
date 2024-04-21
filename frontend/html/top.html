@@ -18,11 +18,11 @@
     <div class="d-flex mx-auto m-4 align-items-center" style="width: 500px;">
       <div class="p-3">郵便番号 or 地名で検索</div>
       <input type="text" id="zipcode" />
-      <button id="search" class="search text-primary">検索</button>
+      <button id="search" class="btn search btn-primary">検索</button>
     </div>
     <form id="top-page-form">
       <input type="number" id="top-page" min="1">
-      <button type="submit">入力したページへ移動</button>
+      <button type="submit" class="btn btn-primary">入力したページへ移動</button>
     </form>
     <table class="table table-light table-hover my-5">
       <thead>
@@ -36,21 +36,12 @@
         </tr>
       </thead>
       <tbody id="tbody">
-        <tr>
-          <th scope="row">*</th>
-          <td>000-0000</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <!-- 押せば詳細のapiを叩く + 詳細ページに移動する -->
-          <td><button id="detail" class="search text-primary">詳細</button></td>
-        </tr>
       </tbody>
     </table>
 
     <form id="bottom-page-form">
       <input type="number" id="bottom-page" min="1">
-      <button type="submit">入力したページへ移動</button>
+      <button type="submit" class="btn search btn-primary">入力したページへ移動</button>
     </form>
 
     <footer class="footer mt-auto py-3 bg-light">
