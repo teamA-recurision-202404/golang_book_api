@@ -28,6 +28,7 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 
 	query := r.URL.Query()
 	page := query.Get("page")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	sortOrder := query.Get("sort") // 変数名sortは不可っぽい ライブラリの名前とかぶるため
 
 	response, err := http.Get("https://postcode.teraren.com/postcodes.json?page=" + page)

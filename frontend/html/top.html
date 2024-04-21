@@ -15,19 +15,15 @@
   </head>
   <body class="mx-5">
     <h1 class="text-center my-5">郵便番号取得APIのデモ</h1>
-    <div class="d-flex mx-auto mb-4" style="width: 500px;">
-      <p>郵便番号 or 地名で検索</p>
+    <div class="d-flex mx-auto m-4 align-items-center" style="width: 500px;">
+      <div class="p-3">郵便番号 or 地名で検索</div>
       <input type="text" id="zipcode" />
       <button id="search" class="search text-primary">検索</button>
     </div>
-
-    <!-- 押せば詳細のapiを叩く + 詳細ページに移動する -->
-    <button id="api-detail" class="detail">詳細</button>
-
-    <div class="d-flex">
-      <input type="text" id="list-page" />
-      <button id="search" class="search text-dark">入力したページへ移動</button>
-    </div>
+    <form id="top-page-form">
+      <input type="number" id="top-page" min="1">
+      <button type="submit">入力したページへ移動</button>
+    </form>
     <table class="table table-light table-hover my-5">
       <thead>
         <tr>
@@ -40,13 +36,22 @@
         </tr>
       </thead>
       <tbody id="tbody">
+        <tr>
+          <th scope="row">*</th>
+          <td>000-0000</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <!-- 押せば詳細のapiを叩く + 詳細ページに移動する -->
+          <td><button id="detail" class="search text-primary">詳細</button></td>
+        </tr>
       </tbody>
     </table>
 
-    <div class="d-flex my-5">
-      <input type="text"id="list-page" />
-      <button id="search" class="search text-dark">入力したページへ移動</button>
-    </div>
+    <form id="bottom-page-form">
+      <input type="number" id="bottom-page" min="1">
+      <button type="submit">入力したページへ移動</button>
+    </form>
 
     <footer class="footer mt-auto py-3 bg-light">
       <div class="container d-flex justify-content-end">
