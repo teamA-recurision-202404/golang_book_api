@@ -14,12 +14,10 @@ async function fetchDetail() {
       throw new Error(`Error fetching data: ${response.statusText}`);
     }
     const data = await response.json();
-    // console.log(data);
     // データを詳細ページに渡す
     //   SessionStorageとは、ウェブブラウザに搭載されている機能の一つ
     //   参考: https://developer.mozilla.org/ja/docs/Web/API/Window/sessionStorage
     sessionStorage.setItem('detail', JSON.stringify(data));
-
     // 画面遷移
     window.location.href = './detail.html';
   } catch (error) {
@@ -29,15 +27,6 @@ async function fetchDetail() {
 
 detailBtn.addEventListener('click', () => {
   fetchDetail();
-});
-
-// === 検索ボタンを押した時の処理 ===
-
-const searchBtn = document.querySelector('#search');
-const searchInput = document.querySelector('#search-input');
-
-searchBtn.addEventListener('click', () => {
-  fetchSearch();
 });
 
 // === ダミーデータを100列表示する処理 ===
@@ -91,3 +80,12 @@ for (let i = 0; i < 100; i++) {
 }
 
 // === ここまで: ダミーデータを100列表示する処理 ===
+
+// === 検索ボタンを押した時の処理 ===
+
+const searchBtn = document.querySelector('#search');
+const searchInput = document.querySelector('#search-input');
+
+searchBtn.addEventListener('click', () => {
+  fetchSearch();
+});

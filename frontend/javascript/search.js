@@ -1,11 +1,5 @@
-const tbody = document.querySelector('#tbody');
-
 const searchResult = JSON.parse(sessionStorage.getItem('searchResult'));
 const searchKeyword = sessionStorage.getItem('searchKeyword');
-
-// === 検索ワードをフォームに表示する処理 ===
-const searchInput = document.querySelector('#search-input');
-searchInput.value = searchKeyword;
 
 // === テーブルに最大100列の検索結果を表示する ===
 
@@ -18,6 +12,8 @@ searchInput.value = searchKeyword;
 //  <td>Brooklyn</td>
 //  <td><button id="detail" class="search text-primary">詳細</button></td>
 // </tr>
+
+const tbody = document.querySelector('#tbody');
 
 for (let i = 0; i < searchResult.length; i++) {
   const tr = document.createElement('tr');
@@ -51,6 +47,18 @@ for (let i = 0; i < searchResult.length; i++) {
 }
 
 // === ここまで: 検索結果を最大100列表示する処理 ===
+
+// === 検索ボタンを押した時の処理 ===
+
+const searchButton = document.querySelector('#search');
+const searchInput = document.querySelector('#search-input');
+
+searchButton.addEventListener('click', () => {
+  fetchSearch();
+});
+
+// === 検索ワードをフォームに表示する処理 ===
+searchInput.value = searchKeyword;
 
 // === すべての詳細ボタンに クリック時のfetchDetail実行を追加 ===
 
