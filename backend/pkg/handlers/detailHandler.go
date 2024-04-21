@@ -30,6 +30,9 @@ func isNumericString(s string) bool {
 }
 
 func DetailHandler(w http.ResponseWriter, r *http.Request) {
+	// "*" はワイルドカードで、どのドメインからのリクエストも許可する
+	// 本番環境ではセキュリティ上の理由から設定しないことが推奨される
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 
 	// パラメータを取得
