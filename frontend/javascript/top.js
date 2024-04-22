@@ -1,6 +1,4 @@
-const fetchBtn = document.querySelector('.search');
 const tbody = document.querySelector('#tbody');
-const detailBtn = document.querySelector('#api-detail');
 
 async function postCodeList(pageNumber) {
   const serverUrl = 'http://localhost:8000/api';
@@ -14,6 +12,7 @@ async function postCodeList(pageNumber) {
     }
     const data = await response.json();
     make_list(data['results']);
+    setDetailButtons();
   } catch (error) {
     console.error('Error:', error);
   }
@@ -71,6 +70,7 @@ function make_list(list) {
     td4.textContent = list[i].suburb;
     button.textContent = '詳細';
     button.classList.add('detail', 'btn', 'btn-success');
+    button.value = list[i].new;
 
     tr.appendChild(th);
     tr.appendChild(td1);
@@ -81,4 +81,29 @@ function make_list(list) {
     td5.appendChild(button);
     tbody.appendChild(tr);
   }
+}
+
+// === 検索ボタンを押した時の処理（search.jsと重複しているので共通化できるかも） ===
+
+const searchButton = document.querySelector('#search');
+const searchInput = document.querySelector('#search-input');
+
+searchButton.addEventListener('click', () => {
+  fetchSearch();
+});
+
+// === 検索ワードをフォームに表示する処理 ===
+searchInput.value = searchKeyword;
+
+// TODO: リファクタ (search.jsにも同様に適用する)
+// === すべての詳細ボタンに クリック時のfetchDetail実行を追加 ===
+
+function setDetailButtons() {
+  const detailButtons = document.querySelectorAll('.detail');
+
+  detailButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      fetchDetail(button.value);
+    });
+  });
 }
