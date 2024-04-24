@@ -1,6 +1,4 @@
-const fetchBtn = document.querySelector('.search');
 const tbody = document.querySelector('#tbody');
-const detailBtn = document.querySelector('#api-detail');
 
 async function postCodeList(pageNumber) {
   const serverUrl = 'http://localhost:8000/api';
@@ -14,6 +12,7 @@ async function postCodeList(pageNumber) {
     }
     const data = await response.json();
     make_list(data['results']);
+    setDetailButtons();
   } catch (error) {
     console.error('Error:', error);
   }

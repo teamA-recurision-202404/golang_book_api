@@ -61,7 +61,7 @@ async function fetchSearch() {
       throw new Error(`Error fetching data: ${response.statusText}`);
     }
     const data = await response.json();
-    sessionStorage.setItem('searchResult', JSON.stringify(data));
+    sessionStorage.setItem('searchResult', JSON.stringify(data.results));
     sessionStorage.setItem('searchKeyword', searchInput.value);
 
     // 画面遷移
