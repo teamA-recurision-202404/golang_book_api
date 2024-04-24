@@ -2,7 +2,7 @@ const searchResult = JSON.parse(sessionStorage.getItem('searchResult'));
 const searchKeyword = sessionStorage.getItem('searchKeyword');
 
 // === 検索ワードが未入力の場合の処理 ===
-function validateResult() {
+function messageEmptyKeyword() {
   if (searchResult.status_code === 400) {
     const tr = document.createElement('tr');
     tr.textContent = '検索ワードを入力してください';
@@ -12,7 +12,7 @@ function validateResult() {
 }
 
 // === 検索結果が0件の場合の処理 ===
-function validateEmptyResult() {
+function messageEmptyResult() {
   if (searchResult.length === 0) {
     const tr = document.createElement('tr');
     tr.textContent = '検索結果がありません';
@@ -35,8 +35,8 @@ function validateEmptyResult() {
 
 const tbody = document.querySelector('#tbody');
 
-validateResult();
-validateEmptyResult();
+messageEmptyKeyword();
+messageEmptyResult();
 make_list(searchResult);
 
 // === 検索ボタンを押した時の処理 ===
