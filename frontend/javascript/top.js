@@ -3,7 +3,6 @@ const tbody = document.querySelector('#tbody');
 async function postCodeList(pageNumber) {
   const serverUrl = 'http://localhost:8000/api';
   try {
-    console.log(`${serverUrl}/list`);
     const response = await fetch(`${serverUrl}/list?page=${pageNumber}`, {
       mode: 'cors',
     });
@@ -64,13 +63,13 @@ function make_list(list) {
 
     th.textContent = i + 1;
     th.scope = 'row';
-    td1.textContent = convertPostcode(list[i].new);
+    td1.textContent = convertPostcode(list[i].postcode);
     td2.textContent = list[i].prefecture;
     td3.textContent = list[i].city;
     td4.textContent = list[i].suburb;
     button.textContent = '詳細';
     button.classList.add('detail', 'btn', 'btn-success');
-    button.value = list[i].new;
+    button.value = list[i].postcode;
 
     tr.appendChild(th);
     tr.appendChild(td1);

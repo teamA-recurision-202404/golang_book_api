@@ -10,8 +10,6 @@ import (
 )
 
 func SearchHandler(w http.ResponseWriter, r *http.Request) {
-	// "*" はワイルドカードで、どのドメインからのリクエストも許可する
-	// 本番環境ではセキュリティ上の理由から設定しないことが推奨される
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 
@@ -41,11 +39,16 @@ func SearchHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var postcodes []structs.Postcode
+	var postcodes []structs.PostcodeList
 	err = json.Unmarshal(body, &postcodes)
 	if err != nil {
 		return
 	}
 
-	json.NewEncoder(w).Encode(structs.ResponseList{Results: postcodes})
+	var outputPostcodes []structs.PostcodeListOutput
+	for _, p := range postcodes {
+		outputPostcodes = append(outputPostcodes, convertToOutput(p))
+	}
+
+	json.NewEncoder(w).Encode(structs.ResponseList{Results: outputPostcodes})
 }

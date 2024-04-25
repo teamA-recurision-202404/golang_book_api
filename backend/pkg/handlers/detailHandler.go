@@ -65,6 +65,13 @@ func DetailHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	outputPostcode := convertToDetailOutput(postcodeDetail)
+
 	// 構造体をjsonに変換
-	json.NewEncoder(w).Encode(postcodeDetail)
+	json.NewEncoder(w).Encode(outputPostcode)
+}
+
+// PostcodeListからPostcodeListOutputに変換する
+func convertToDetailOutput(p structs.PostcodeDetail) structs.PostcodeDetailOutput {
+    return structs.PostcodeDetailOutput(p)
 }
