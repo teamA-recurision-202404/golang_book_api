@@ -58,7 +58,7 @@ func DetailHandler(w http.ResponseWriter, r *http.Request) {
 	body, _ := io.ReadAll(res.Body)
 
 	// レスポンスを構造体に変換
-	var postcodeDetail structs.Postcode
+	var postcodeDetail structs.PostcodeDetail
 
 	if err := json.Unmarshal(body, &postcodeDetail); err != nil {
 		fmt.Println(err)
