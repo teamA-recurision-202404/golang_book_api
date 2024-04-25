@@ -92,9 +92,6 @@ searchButton.addEventListener('click', () => {
   fetchSearch();
 });
 
-// === 検索ワードをフォームに表示する処理 ===
-searchInput.value = searchKeyword;
-
 // TODO: リファクタ (search.jsにも同様に適用する)
 // === すべての詳細ボタンに クリック時のfetchDetail実行を追加 ===
 
