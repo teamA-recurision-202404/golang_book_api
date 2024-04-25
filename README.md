@@ -3,13 +3,44 @@
 * 郵便番号データ取得API
 * APIのデモアプリ
 
-### アクセス方法
+### APIを起動する
 
-1. リポジトリーをgit cloneする
-   `git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
+  * git cloneして、main.goを実行
 
-2. 絶対パスをブラウザで入力し、top.htｍlを開く
-   `file:///home/hoge/golang_zipcode_api/frontend/html/top.html`
+   ```
+      $ git clone git@github.com:teamA-recursion-202404/golang_postcode_api.git
+
+      $ cd golang_postcode_api/backend
+
+      $ go run main.go
+   ```
+
+### デモアプリを試す
+
+   * index.htmlをブラウザで開く(絶対パスをブラウザのURL欄に入力する)
+
+   ```
+      // 入力例
+      file:///home/hoge/golang_postcode_api/frontend/html/top.html
+   ```
+
+#### デモアプリ画面
+
+   * トップページ（リスト表示）
+
+   ![top](./images/スクリーンショット30.png)
+
+   * 検索
+
+   ![search](./images/スクリーンショット44.png)
+
+   * 詳細
+
+   ![detail](./images/スクリーンショット53.png)
+
+
+
+
 
 ---
 
@@ -83,8 +114,18 @@ curl 'http://localhost:8000/api/list?page=1'
 ```
 {
   "results":[
-    {"new":"0600000","prefecture":"北海道","prefecture_kana":"ホッカイドウ","prefecture_roman":"Hokkaidou","city":"札幌市中央区","city_kana":"サッポロシチュウオウク","city_roman":"Sapporoshichuuouku","suburb":"","suburb_kana":"","suburb_roman":"","street_address":""},
-    {"new":"0640941","prefecture":"北海道","prefecture_kana":"ホッカイドウ","prefecture_roman":"Hokkaidou","city":"札幌市中央区","city_kana":"サッポロシチュウオウク","city_roman":"Sapporoshichuuouku","suburb":"旭ケ丘","suburb_kana":"アサヒガオカ","suburb_roman":"Asahigaoka","street_address":""},
+    {
+      "postcode": "0600000",
+      "prefecture": "北海道",
+      "city": "札幌市中央区",
+      "suburb": ""
+    },
+    {
+      "postcode": "0640941",
+      "prefecture": "北海道",
+      "city": "札幌市中央区",
+      "suburb": "旭ケ丘"
+    },
     ...
   ]
 }
@@ -109,8 +150,18 @@ curl 'http://localhost:8000/api/search?keyword=富士山'
 ```
 {
   "results":[
-    {"new":"3580017","prefecture":"埼玉県","prefecture_kana":"サイタマケン","prefecture_roman":"Saitamaken","city":"入間市","city_kana":"イルマシ","city_roman":"Irumashi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""},
-    {"new":"1901202","prefecture":"東京都","prefecture_kana":"トウキョウト","prefecture_roman":"Toukyouto","city":"西多摩郡瑞穂町","city_kana":"ニシタマグンミズホマチ","city_roman":"Nishitamagummizuhomachi","suburb":"駒形富士山","suburb_kana":"コマガタフジヤマ","suburb_roman":"Komagatafujiyama","street_address":""},
+    {
+      "postcode": "3580017",
+      "prefecture": "埼玉県",
+      "city": "入間市",
+      "suburb": "駒形富士山"
+    },
+    {
+      "postcode": "1901202",
+      "prefecture": "東京都",
+      "city": "西多摩郡瑞穂町",
+      "suburb": "駒形富士山"
+    },
     ...
   ]
 }
