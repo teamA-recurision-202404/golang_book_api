@@ -6,17 +6,34 @@ import (
 	"io"
 	"net/http"
 	"sort"
+	"strconv"
 
 	"github.com/teamA-recursion-202404/golang_postcode_api/pkg/structs"
 )
 
 func ListHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	query := r.URL.Query()
 	page := query.Get("page")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	sortOrder := query.Get("sort") // 変数名sortは不可っぽい ライブラリの名前とかぶるため
+
+	i, err := strconv.Atoi(page)
+	// page が数字でない場合、エラーメッセージを返す
+	if err != nil {
+		json.NewEncoder(w).Encode(
+			structs.ErrorMessage{Message: "ページ番号には数字を入力してください", StatusCode: 400},
+		)
+		return
+	}
+	// page が1210以上の場合、エラーメッセージを返す
+	if i >= 1210 {
+		json.NewEncoder(w).Encode(
+			structs.ErrorMessage{Message: "リスト表示のページ番号には 1209 以下の数字を入力してください", StatusCode: 400},
+		)
+		return
+	}
 
 	response, err := http.Get("https://postcode.teraren.com/postcodes.json?page=" + page)
 
