@@ -49,13 +49,13 @@ for (let i = 0; i < searchResult.length; i++) {
 
   th.textContent = i + 1;
   th.scope = 'row';
-  td1.textContent = convertPostcode(searchResult[i].new);
+  td1.textContent = convertPostcode(searchResult[i].postcode);
   td2.textContent = searchResult[i].prefecture;
   td3.textContent = searchResult[i].city;
   td4.textContent = searchResult[i].suburb;
   button.textContent = '詳細';
   button.classList.add('detail', 'btn', 'btn-success');
-  button.value = searchResult[i].new;
+  button.value = searchResult[i].postcode;
 
   tr.appendChild(th);
   tr.appendChild(td1);

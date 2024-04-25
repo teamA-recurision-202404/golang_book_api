@@ -12,8 +12,8 @@ import (
 )
 
 func ListHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 
 	query := r.URL.Query()
 	page := query.Get("page")
@@ -49,23 +49,30 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var postcodes []structs.Postcode
+	var postcodes []structs.PostcodeList
 	err = json.Unmarshal(body, &postcodes)
 	if err != nil {
 		return
 	}
 
-	// asc or desc が指定されていたらソートする
-	sortPostcodes(postcodes, sortOrder)
-
-	err = json.NewEncoder(w).Encode(structs.ResponseList{Results: postcodes})
-	if err != nil {
-		http.Error(w, "Failed to encode JSON", http.StatusInternalServerError)
-		return
+	var outputPostcodes []structs.PostcodeListOutput
+	for _, p := range postcodes {
+		outputPostcodes = append(outputPostcodes, convertToOutput(p))
 	}
+
+	// asc or desc が指定されていたらソートする
+	sortPostcodes(outputPostcodes, sortOrder)
+
+	json.NewEncoder(w).Encode(structs.ResponseList{Results: outputPostcodes})
 }
 
-func sortPostcodes(postcodes []structs.Postcode, sortOrder string) {
+// PostcodeListからPostcodeListOutputに変換する
+func convertToOutput(p structs.PostcodeList) structs.PostcodeListOutput {
+    return structs.PostcodeListOutput(p)
+}
+
+
+func sortPostcodes(postcodes []structs.PostcodeListOutput, sortOrder string) {
 	if sortOrder == "asc" {
 		sort.Slice(postcodes, func(i, j int) bool {
 			return postcodes[i].Postcode < postcodes[j].Postcode

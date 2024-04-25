@@ -13,7 +13,7 @@ const suburb = document.getElementById('suburb');
 const suburb_kana = document.getElementById('suburb_kana');
 const suburb_roman = document.getElementById('suburb_roman');
 
-postcode.textContent += convertPostcode(sessionData.new);
+postcode.textContent += convertPostcode(sessionData.postcode);
 prefecture.textContent = sessionData.prefecture;
 prefecture_kana.textContent = sessionData.prefecture_kana;
 prefecture_roman.textContent = sessionData.prefecture_roman;
