@@ -80,7 +80,6 @@ function make_list(list) {
     td4.textContent = list[i].suburb;
     button.textContent = '詳細';
     button.classList.add('detail', 'btn', 'btn-success');
-    button.value = list[i].new;
     button.value = list[i].postcode;
 
     tr.appendChild(th);
