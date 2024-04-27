@@ -3,6 +3,7 @@ const searchKeyword = sessionStorage.getItem('searchKeyword');
 
 // === 検索ワードが未入力の場合の処理 ===
 function messageEmptyKeyword() {
+  console.log(searchResult);
   if (searchResult.status_code === 400) {
     const tr = document.createElement('tr');
     tr.textContent = '検索ワードを入力してください';
@@ -13,7 +14,7 @@ function messageEmptyKeyword() {
 
 // === 検索結果が0件の場合の処理 ===
 function messageEmptyResult() {
-  if (searchResult.length === 0) {
+  if (searchResult.results === null) {
     const tr = document.createElement('tr');
     tr.textContent = '検索結果がありません';
     tbody.appendChild(tr);
@@ -35,9 +36,9 @@ function messageEmptyResult() {
 
 const tbody = document.querySelector('#tbody');
 
+make_list(searchResult);
 messageEmptyKeyword();
 messageEmptyResult();
-make_list(searchResult)
 
 // === 検索ボタンを押した時の処理 ===
 

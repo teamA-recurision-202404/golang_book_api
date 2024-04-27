@@ -18,7 +18,11 @@ async function fetchSearch() {
       throw new Error(`Error fetching data: ${response.statusText}`);
     }
     const data = await response.json();
-    sessionStorage.setItem('searchResult', JSON.stringify(data.results));
+    if (data.results) {
+      sessionStorage.setItem('searchResult', JSON.stringify(data.results));
+    } else {
+      sessionStorage.setItem('searchResult', JSON.stringify(data));
+    }
     sessionStorage.setItem('searchKeyword', searchInput.value);
 
     // 画面遷移
