@@ -23,17 +23,6 @@ function messageEmptyResult() {
 }
 
 // === テーブルに最大100列の検索結果を表示する ===
-
-// 作成されるtr要素の中身
-// <tr>
-//  <th scope="row">1</th>
-//  <td>111-2222</td>
-//  <td>dummy</td>
-//  <td>New York</td>
-//  <td>Brooklyn</td>
-//  <td><button id="detail" class="search text-primary">詳細</button></td>
-// </tr>
-
 const tbody = document.querySelector('#tbody');
 
 make_list(searchResult);

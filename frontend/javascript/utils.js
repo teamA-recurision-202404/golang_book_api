@@ -54,6 +54,7 @@ async function fetchDetail(value) {
   }
 }
 
+// TODO: pageNumberが存在する場合はそれを引数にする
 function make_list(list) {
   // 作成されるtr要素の中身
   // <tr>

@@ -21,24 +21,23 @@ postCodeList(1);
 
 // === ページ移動する処理 ===
 
-const topForm = document.getElementById('top-page-form');
-topForm.addEventListener('submit', function (event) {
-  event.preventDefault(); // フォームのデフォルトの動作をキャンセル
-
+const topPageButton = document.getElementById('move-page-top');
+topPageButton.addEventListener('click', () => {
   pageNumber = document.getElementById('top-page').value;
   postCodeList(pageNumber);
+  // TODO: 実際には外れないので修正する
+  topPageButton.blur();
 });
 
-const bottomForm = document.getElementById('bottom-page-form');
-bottomForm.addEventListener('submit', function (event) {
-  event.preventDefault(); // フォームのデフォルトの動作をキャンセル
-
+const bottomPageButton = document.getElementById('move-page-bottom');
+bottomPageButton.addEventListener('submit', function (event) {
   pageNumber = document.getElementById('bottom-page').value;
   postCodeList(pageNumber);
+  // TODO: 実際には外れないので修正する
+  bottomPageButton.blur();
 });
 
 // === jsonデータを表示する処理 ===
-
 
 // === 検索ボタンを押した時の処理（search.jsと重複しているので共通化できるかも） ===
 

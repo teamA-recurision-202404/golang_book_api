@@ -20,10 +20,11 @@
       <input type="text" id="search-input" />
       <button id="search" class="btn search btn-primary">検索</button>
     </div>
-    <form id="top-page-form">
+    <!--  -->
+    <div>
       <input type="number" id="top-page" min="1">
-      <button type="submit" class="btn btn-primary">入力したページへ移動</button>
-    </form>
+      <button id="move-page-top" class="btn btn-primary">入力したページへ移動</button>
+    </div>
     <table class="table table-light table-hover my-5">
       <thead>
         <tr>
@@ -39,10 +40,10 @@
       </tbody>
     </table>
 
-    <form id="bottom-page-form">
+    <div>
       <input type="number" id="bottom-page" min="1">
-      <button type="submit" class="btn search btn-primary">入力したページへ移動</button>
-    </form>
+      <button id="move-page-bottom" class="btn search btn-primary">入力したページへ移動</button>
+    </div>
 
     <footer class="footer mt-auto py-3 bg-light">
       <div class="container d-flex justify-content-end">
